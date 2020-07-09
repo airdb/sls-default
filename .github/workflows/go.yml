@@ -25,8 +25,8 @@ jobs:
 
       - name: Deploy Tecent scf
         env: 
-          APPID: {{ secrets.TENCENT_APPID }}
-          REGION: {{ secrets.TENCENT_REGION }}
+          APPID: ${{ secrets.TENCENT_APPID }}
+          REGION: ${{ secrets.TENCENT_REGION }}
           SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
           SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
         run: |
