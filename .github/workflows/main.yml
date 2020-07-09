@@ -20,7 +20,7 @@ jobs:
         run: |
           go version
           go mod download
-          go build main.go
+          go build -o main main.go
           #go build -ldflags "-X github.com/airdb/adb/cmd.BuildTime=$timeNow" main.go
 
       - name: Deploy Tecent scf
@@ -33,4 +33,4 @@ jobs:
            pip --version
            sudo pip install scf
            scf configure set --appid $APPID --region $REGION --secret-id $SECRET_ID --secret-key $SECRET_KEY
-           scf deploy -t serverless.yaml -f
+           scf deploy -t template.yaml -f
