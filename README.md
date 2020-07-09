@@ -18,3 +18,11 @@
 ```buildoutcfg
 curl https://service-xxxx.apigw.tencentcs.com/release/<function_name>
 ```
+
+
+## Deploy by github action
+```
+scf configure set --appid $APPID --region $REGION --secret-id $SECRET_ID --secret-key $SECRET_KEY
+scf  init  -r go1
+scf deploy -t template.yaml  -f
+```
