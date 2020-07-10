@@ -8,9 +8,9 @@ import (
 
 type Lost struct {
 	ID        uint       `json:"id"`
-	CreatedAt time.Time  `json:"created_at"`
-	UpdatedAt time.Time  `json:"updated_at"`
-	DeletedAt *time.Time `json:"deleted_at,omitempty"`
+	// CreatedAt time.Time  `json:"created_at"`
+	// UpdatedAt time.Time  `json:"updated_at"`
+	// DeletedAt *time.Time `json:"deleted_at,omitempty"`
 
 	UUID      string `json:"uuid"`
 	AvatarURL string `json:"avatar_url"`
@@ -45,9 +45,6 @@ func FromPoLost(lost *po.Lost) *Lost {
 
 	return &Lost{
 		ID:              lost.ID,
-		CreatedAt:       lost.CreatedAt,
-		UpdatedAt:       lost.UpdatedAt,
-		DeletedAt:       lost.DeletedAt,
 		UUID:            lost.UUID,
 		AvatarURL:       lost.AvatarURL,
 		Nickname:        lost.Nickname,
@@ -88,6 +85,10 @@ func FromPoLosts(losts []*po.Lost) []*Lost {
 func SearchLost(keywords string) []*Lost {
 	var losts []*Lost
 
+	aa := po.SearchLost(keywords)
+	for _, a := range aa {
+		fmt.Println("po data", a)
+	}
 	losts = append(losts, FromPoLosts(po.SearchLost(keywords))...)
 
 	return losts

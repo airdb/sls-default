@@ -13,12 +13,12 @@ import (
 )
 
 // Help Information.
-var Usage = `
-		bbhj 机器人使用帮助\n
-		示例1：bbhj 4407\n
-		示例2：bbhj 山西 4407\n
-		示例3：bbhj 山西 运城 张\n
-		\n
+var Usage = `bbhj 机器人使用帮助
+
+		示例1：bbhj 4407
+		示例2：bbhj 山西 4407
+		示例3：bbhj 山西 运城 张
+
 		说明：bbhj命令支持最多3个关键字的查询; 命令及各关键字只能以空格分隔。
 `
 
@@ -75,34 +75,45 @@ func Run(event events.APIGatewayRequest) (resp events.APIGatewayResponse, err er
 	return
 }
 
-func defaultIndex(event events.APIGatewayRequest) (string, error) {
+func defaultIndex(event events.APIGatewayRequest) (resp events.APIGatewayResponse, err error) {
+	headers := make(map[string]string)
+	headers["Content-Type"] = "text/html"
+
+	resp.StatusCode = 200
+	resp.Headers = headers
+	resp.Body = Usage
+
 	if event.QueryString["message"] != nil {
-		return Usage, nil
+		return resp, nil
 	}
 
-	return "message 参数缺失", nil
+	resp.Body ="message 参数缺失"
+	return resp, nil
 }
 
 func robot(event events.APIGatewayRequest) (resp events.APIGatewayResponse, err error) {
-	msg := "hello robot"
+	headers := make(map[string]string)
+	headers["Content-Type"] = "text/html"
 
-	fmt.Println("message",event.QueryString["message"])
+	resp.StatusCode = 200
+	resp.Headers  = headers
 
-	keywords := event.QueryString["message"]
-	if keywords != nil{
+	if event.QueryString["message"] == nil{
+		resp.Body = Usage
 		return resp, nil
 	}
-	fmt.Println("keyworlds", keywords, event.QueryString["message"])
+
+	keywords := event.QueryString["message"]
+	fmt.Println("keywords", keywords, event.QueryString["message"])
 
 	if  len(keywords) == 1 {
 		losts := vo.SearchLost(keywords[0])
 
 		for _, lost := range losts {
-			msg += lost.Subject + "\n" + lost.DataFrom + "\n"
+			fmt.Println(lost)
+			resp.Body += lost.Subject + "\n" + lost.DataFrom + "\n"
 		}
 	}
-
-	resp.Body = msg
 
 	return resp, nil
 }
