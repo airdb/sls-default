@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/airdb/scf-go/model/po"
 	"github.com/airdb/scf-go/model/vo"
 	"github.com/tencentyun/scf-go-lib/cloudfunction"
 	"github.com/tencentyun/scf-go-lib/events"
@@ -24,7 +23,7 @@ var Usage = `bbhj 机器人使用帮助
 
 // Refer: https://xuthus.cc/go/scf-go-runtime.html
 func handler(ctx context.Context, event events.APIGatewayRequest) (interface{}, error){
-	po.InitDB()
+	// po.InitDB()
 
 	subPath := strings.TrimPrefix(event.Path, "/helloworld")
 	switch subPath {
