@@ -14,7 +14,7 @@ Resources:
       Type: TencentCloud::Serverless::Function
       Properties:
         Type: Event
-        Description: This is a template function
+        Description: Tencent Cloud APIGateway event sample.
         Environment:
           Variables:
             ENV_FIRST: env1

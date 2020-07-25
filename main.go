@@ -1,11 +1,13 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"strings"
 
+	"github.com/ajstarks/svgo"
 	"github.com/airdb/scf-go/model/vo"
 	"github.com/tencentyun/scf-go-lib/cloudfunction"
 	"github.com/tencentyun/scf-go-lib/events"
@@ -36,6 +38,8 @@ func handler(ctx context.Context, event events.APIGatewayRequest) (interface{}, 
 	case "", "/index":
 		fmt.Println("run index")
 		return defaultIndex(event)
+	case "/svg":
+		return svgOut(event)
 	default:
 		return defaultIndex(event)
 	}
@@ -86,7 +90,7 @@ func defaultIndex(event events.APIGatewayRequest) (resp events.APIGatewayRespons
 		return resp, nil
 	}
 
-	resp.Body ="message 参数缺失"
+	resp.Body ="message 参数缺失2"
 	return resp, nil
 }
 
@@ -114,6 +118,28 @@ func robot(event events.APIGatewayRequest) (resp events.APIGatewayResponse, err 
 		}
 	}
 
+	return resp, nil
+}
+
+func svgOut(event events.APIGatewayRequest) (resp events.APIGatewayResponse, err error) {
+	headers := make(map[string]string)
+	headers["Content-Type"] = "image/svg+xml"
+
+	resp.StatusCode = 200
+	resp.Headers = headers
+	resp.Body = Usage
+
+	width := 500
+	height := 500
+
+	buf := new(bytes.Buffer)
+	canvas := svg.New(buf)
+	canvas.Start(width, height)
+	canvas.Circle(width/2, height/2, 100)
+	canvas.Text(width/2, height/2, "About Me", "text-anchor:middle;font-size:30px;fill:white")
+	canvas.End()
+
+	resp.Body = buf.String()
 	return resp, nil
 }
 
