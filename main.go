@@ -5,15 +5,14 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/tencentyun/scf-go-lib/cloudfunction"
 	"strings"
 
-	"github.com/ajstarks/svgo"
 	"github.com/airdb/scf-go/model/vo"
-	"github.com/tencentyun/scf-go-lib/cloudfunction"
+	"github.com/ajstarks/svgo"
 	"github.com/tencentyun/scf-go-lib/events"
 )
 
-// Help Information.
 var Usage = `bbhj 机器人使用帮助
 
 		示例1：bbhj 4407
@@ -23,15 +22,20 @@ var Usage = `bbhj 机器人使用帮助
 		说明：bbhj命令支持最多3个关键字的查询; 命令及各关键字只能以空格分隔。
 `
 
+func main() {
+	// Make the handler available for Remote Procedure Call by Cloud Function
+	cloudfunction.Start(Run)
+}
+
 // Refer: https://xuthus.cc/go/scf-go-runtime.html
-func handler(ctx context.Context, event events.APIGatewayRequest) (interface{}, error){
+func Run(ctx context.Context, event events.APIGatewayRequest) (interface{}, error){
 	// po.InitDB()
 
 	subPath := strings.TrimPrefix(event.Path, "/helloworld")
 	switch subPath {
 	case "/hello":
 		fmt.Println("run hello")
-		return Run(event)
+		return hello(event)
 	case "/robot":
 		fmt.Println("run robot")
 		return robot(event)
@@ -45,7 +49,7 @@ func handler(ctx context.Context, event events.APIGatewayRequest) (interface{}, 
 	}
 }
 
-func Run(event events.APIGatewayRequest) (resp events.APIGatewayResponse, err error) {
+func hello(event events.APIGatewayRequest) (resp events.APIGatewayResponse, err error) {
 	// 返回body中的内容
 	var body = struct {
 		Code    int         `json:"code"`
@@ -143,7 +147,3 @@ func svgOut(event events.APIGatewayRequest) (resp events.APIGatewayResponse, err
 	return resp, nil
 }
 
-func main() {
-	// Make the handler available for Remote Procedure Call by Cloud Function
-	cloudfunction.Start(handler)
-}
