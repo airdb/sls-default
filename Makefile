@@ -1,5 +1,12 @@
-all: deploy
+SHELL = /bin/bash
+
+all: build docker
+
+build:
+	GOOS=linux go build -o main main.go
 
 deploy:
-	GOOS=linux go build -o main main.go
 	scf deploy -t template.yaml  -f
+
+docker:
+	docker run -it --rm  --env-file ~/.env -v $(shell pwd):/srv airdb/scf
