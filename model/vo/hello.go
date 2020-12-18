@@ -2,12 +2,13 @@ package vo
 
 import (
 	"fmt"
-	"github.com/airdb/scf-go/model/po"
 	"time"
+
+	"github.com/airdb/scf-go/model/po"
 )
 
 type Lost struct {
-	ID        uint       `json:"id"`
+	ID uint `json:"id"`
 	// CreatedAt time.Time  `json:"created_at"`
 	// UpdatedAt time.Time  `json:"updated_at"`
 	// DeletedAt *time.Time `json:"deleted_at,omitempty"`
@@ -89,6 +90,7 @@ func SearchLost(keywords string) []*Lost {
 	for _, a := range aa {
 		fmt.Println("po data", a)
 	}
+
 	losts = append(losts, FromPoLosts(po.SearchLost(keywords))...)
 
 	return losts

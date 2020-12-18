@@ -1,11 +1,11 @@
 package po
 
 import (
-"strings"
-"time"
+	"strings"
+	"time"
 
-"github.com/airdb/sailor/dbutils"
-"github.com/jinzhu/gorm"
+	"github.com/airdb/sailor/dbutils"
+	"github.com/jinzhu/gorm"
 )
 
 const (
