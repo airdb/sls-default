@@ -94,7 +94,7 @@ func defaultIndex(event events.APIGatewayRequest) (resp events.APIGatewayRespons
 		return resp, nil
 	}
 
-	resp.Body ="message 参数缺失2"
+	resp.Body ="message 参数缺失4"
 	return resp, nil
 }
 
@@ -147,3 +147,23 @@ func svgOut(event events.APIGatewayRequest) (resp events.APIGatewayResponse, err
 	return resp, nil
 }
 
+type WS struct {
+	RequestContext struct {
+		HTTPMethod string `json:"httpMethod"`
+		Identity   struct {
+			SecretID string `json:"secretId"`
+		} `json:"identity"`
+		Path            string `json:"path"`
+		RequestID       string `json:"requestId"`
+		ServiceName     string `json:"serviceName"`
+		SourceIP        string `json:"sourceIp"`
+		Stage           string `json:"stage"`
+		WebsocketEnable bool   `json:"websocketEnable"`
+	} `json:"requestContext"`
+	Websocket struct {
+		Action                 string `json:"action"`
+		SecConnectionID        string `json:"secConnectionID"`
+		SecWebSocketExtensions string `json:"secWebSocketExtensions"`
+		SecWebSocketProtocol   string `json:"secWebSocketProtocol"`
+	} `json:"websocket"`
+}

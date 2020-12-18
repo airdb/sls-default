@@ -1,3 +1,4 @@
 template.yaml
 main
 .idea/
+.env

@@ -10,7 +10,7 @@ jobs:
         uses: actions/setup-go@v2
         with:
           stable: 'true'
-          go-version: 1.14
+          go-version: 1.15
         id: go
 
       - name: Check out code into the Go module directory
@@ -30,7 +30,6 @@ jobs:
           SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
           SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
         run: |
-           pip --version
-           sudo pip install scf
-           scf configure set --appid $APPID --region $REGION --secret-id $SECRET_ID --secret-key $SECRET_KEY
-           scf deploy -t template.yaml -f
+           echo $APPID > .env
+           pwd
+           cat .env
