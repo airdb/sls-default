@@ -1,6 +1,6 @@
 package po
 
-import "github.com/airdb/sailor/dbutils"
+import "airdb.io/airdb/sailor/dbutil"
 
 const (
 	dbMinaAPIRead  = "AIRDB_DB_MINA_API_READ"
@@ -16,5 +16,5 @@ func InitDB() {
 		// dbMinaAPIWirte,
 	)
 
-	dbutils.InitDB(dbNames)
+	dbutil.InitDB(dbNames)
 }

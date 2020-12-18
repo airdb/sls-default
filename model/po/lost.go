@@ -4,8 +4,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/airdb/sailor/dbutils"
-	"github.com/jinzhu/gorm"
+	"airdb.io/airdb/sailor/dbutil"
+	"gorm.io/gorm"
 )
 
 const (
@@ -47,10 +47,10 @@ type Lost struct {
 	SyncStatus     int `gorm:"column:syncstatus;default:0"`
 }
 
-func ListLost(page, pageSize uint) []*Lost {
+func ListLost(page, pageSize int) []*Lost {
 	var losts []*Lost
 
-	dbutils.ReadDB(dbMinaAPIRead).Debug().Offset(page * pageSize).Limit(pageSize).Find(&losts)
+	dbutil.ReadDB(dbMinaAPIRead).Debug().Offset(page * pageSize).Limit(pageSize).Find(&losts)
 
 	return losts
 }
@@ -58,7 +58,7 @@ func ListLost(page, pageSize uint) []*Lost {
 func QueryLostByID(id *uint) *Lost {
 	var lost Lost
 
-	dbutils.ReadDB(dbMinaAPIRead).Debug().First(&lost, *id)
+	dbutil.ReadDB(dbMinaAPIRead).Debug().First(&lost, *id)
 
 	return &lost
 }
@@ -73,18 +73,18 @@ func SearchLost(keywords string) (losts []*Lost) {
 		keys[0] = "%" + keys[0] + "%"
 		keys[1] = "%" + keys[1] + "%"
 		keys[2] = "%" + keys[2] + "%"
-		dbutils.ReadDB(dbMinaAPIRead).Where(
+		dbutil.ReadDB(dbMinaAPIRead).Where(
 			"subject like ? and subject like ? and subject like ? ", keys[0], keys[1], keys[2],
 		).Order("missed_at desc").Limit(pagesize).Find(&losts)
 	case keywordsLen2:
 		keys[0] = "%" + keys[0] + "%"
 		keys[1] = "%" + keys[1] + "%"
-		dbutils.ReadDB(dbMinaAPIRead).Where(
+		dbutil.ReadDB(dbMinaAPIRead).Where(
 			"subject like ? and subject like ? ", keys[0], keys[1],
 		).Order("missed_at desc").Limit(pagesize).Find(&losts)
 	case keywordsLen1:
 		keys[0] = "%" + keys[0] + "%"
-		dbutils.ReadDB(dbMinaAPIRead).Debug().Where(
+		dbutil.ReadDB(dbMinaAPIRead).Debug().Where(
 			"subject like ?", keys[0],
 		).Order("missed_at desc").Limit(pagesize).Find(&losts)
 	}
@@ -101,18 +101,18 @@ func QueryBBSByKeywords(keyword string) (articles []*Lost) {
 		keys[0] = "%" + keys[0] + "%"
 		keys[1] = "%" + keys[1] + "%"
 		keys[2] = "%" + keys[2] + "%"
-		dbutils.ReadDB(dbMinaAPIRead).Where(
+		dbutil.ReadDB(dbMinaAPIRead).Where(
 			"subject like ? and subject like ? and subject like ? ", keys[0], keys[1], keys[2],
 		).Select("subject, data_from").Order("missed_at desc").Limit(pagesize).Find(&articles)
 	case keywordsLen2:
 		keys[0] = "%" + keys[0] + "%"
 		keys[1] = "%" + keys[1] + "%"
-		dbutils.ReadDB(dbMinaAPIRead).Where(
+		dbutil.ReadDB(dbMinaAPIRead).Where(
 			"subject like ? and subject like ? ", keys[0], keys[1],
 		).Select("subject, data_from").Order("missed_at desc").Limit(pagesize).Find(&articles)
 	case keywordsLen1:
 		keys[0] = "%" + keys[0] + "%"
-		dbutils.ReadDB(dbMinaAPIRead).Debug().Where(
+		dbutil.ReadDB(dbMinaAPIRead).Debug().Where(
 			"subject like ?", keys[0],
 		).Select("subject, data_from").Order("missed_at desc").Limit(pagesize).Find(&articles)
 	}
@@ -121,5 +121,5 @@ func QueryBBSByKeywords(keyword string) (articles []*Lost) {
 }
 
 func CreateLost(lost Lost) {
-	dbutils.WriteDB(dbMinaAPIWirte).Save(&lost)
+	dbutil.WriteDB(dbMinaAPIWirte).Save(&lost)
 }
