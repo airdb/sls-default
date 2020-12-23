@@ -43,8 +43,10 @@ func UserPost(c *gin.Context)  {
 	var req QueryUserPostReq
 	if err := c.ShouldBind(&req); err!=nil {
 		c.JSON(http.StatusBadRequest, c.Request)
+
 		return
 	}
+
 	resp := QueryUserPostResp{
 		Address:  req.Address,
 		Province: req.Province,
