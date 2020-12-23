@@ -20,6 +20,9 @@ func NewRouter() {
 	r.GET("/", DefaultRoot)
 	r.GET("/hello", DefaultString)
 
+	userRouter := r.Group("/user")
+	userRouter.GET("root", UserRoot)
+
 	GinFaas = ginAdapter.New(r)
 
 	faas.Start(Handler)

@@ -6,7 +6,7 @@ BUILD := $(shell git rev-parse HEAD)
 LDFLAGS=-ldflags
 LDFLAGS += "-X=airdb.io/airdb/scf-go/internal/version.Version=$(VERSION) \
             -X=airdb.io/airdb/scf-go/internal/version.Build=$(BUILD) \
-            -X=airdb.io/airdb/scf-go/internal/version.BuildTime=$(shell date +%s)"
+            -X=airdb.io/airdb/scf-go/internal/version.BuildTime=$(shell date +%s)":
 
 default: build deploy
 
