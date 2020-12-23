@@ -15,6 +15,16 @@ type QueryUserRootResp struct {
 	Sex int
 }
 
+type QueryUserPostReq struct {
+	Address string `form:"address" json:"address"`
+	Province int `form:"province" json:"province"`
+}
+
+type QueryUserPostResp struct {
+	Address string
+	Province int
+}
+
 func UserRoot(c *gin.Context) {
 	var req QueryUserRootReq
 
@@ -26,5 +36,18 @@ func UserRoot(c *gin.Context) {
 	resp.Name = req.Name
 	resp.Sex = req.Sex
 
+	c.JSON(http.StatusOK, resp)
+}
+
+func UserPost(c *gin.Context)  {
+	var req QueryUserPostReq
+	if err := c.ShouldBind(&req); err!=nil {
+		c.JSON(http.StatusBadRequest, c.Request)
+		return
+	}
+	resp := QueryUserPostResp{
+		Address:  req.Address,
+		Province: req.Province,
+	}
 	c.JSON(http.StatusOK, resp)
 }

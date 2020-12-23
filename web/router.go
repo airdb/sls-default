@@ -22,6 +22,7 @@ func NewRouter() {
 
 	userRouter := r.Group("/user")
 	userRouter.GET("root", UserRoot)
+	userRouter.POST("post", UserPost)
 
 	GinFaas = ginAdapter.New(r)
 
