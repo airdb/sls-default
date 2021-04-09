@@ -1,10 +1,11 @@
 package vo
 
 import (
-	"gorm.io/gorm"
+	"fmt"
 	"time"
 
 	"github.com/airdb/scf-airdb/model/po"
+	"gorm.io/gorm"
 )
 
 type HostedZone struct {
@@ -42,7 +43,6 @@ type CreateHostedZoneReq struct {
 }
 
 type CreateHostedZoneResp struct {
-
 }
 
 type ListHostedZoneReq struct {
@@ -66,12 +66,13 @@ func ListHostedZone(req *ListHostedZoneReq) *ListHostedZoneResp {
 	return &resp
 }
 
-func CreateHostedZone(req *CreateHostedZoneReq) *CreateHostedZoneResp{
+func CreateHostedZone(req *CreateHostedZoneReq) *CreateHostedZoneResp {
 	zone := &HostedZone{
 		HostedZone: req.HostedZone,
 		Registry:   req.Registry,
 		ExpiredAt:  req.ExpiredAt,
 	}
+	fmt.Println("zone is ", zone)
 
 	po.CreateHostedZone(ToPoHostedZone(zone))
 	return &CreateHostedZoneResp{}

@@ -22,11 +22,11 @@ func ListHostedZone(pageNo, pageSize int) []*TabHostedZone {
 		offset = (pageNo - 1) * pageSize
 	}
 
-	dbutil.ReadDB(dbMinaAPIRead).Debug().Offset(offset).Limit(pageSize).Find(&HostedZones)
+	dbutil.ReadDB(dbMasterRead).Debug().Offset(offset).Limit(pageSize).Find(&HostedZones)
 
 	return HostedZones
 }
 
 func CreateHostedZone(zone *TabHostedZone) {
-	dbutil.WriteDB(dbMinaAPIWrite).Save(&zone)
+	dbutil.WriteDB(dbMasterWrite).Create(&zone)
 }
