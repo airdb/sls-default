@@ -3,7 +3,7 @@ package web
 import (
 	"net/http"
 
-	"github.com/airdb/scf-wechat/internal/version"
+	"github.com/airdb/scf-mina/internal/version"
 	"github.com/gin-gonic/gin"
 )
 

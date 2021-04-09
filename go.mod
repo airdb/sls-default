@@ -1,4 +1,4 @@
-module github.com/airdb/scf-wechat
+module github.com/airdb/scf-mina
 
 go 1.16
 

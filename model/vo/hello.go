@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/airdb/scf-wechat/model/po"
+	"github.com/airdb/scf-mina/model/po"
 )
 
 type Lost struct {
