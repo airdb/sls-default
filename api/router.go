@@ -24,7 +24,7 @@ func NewRouter() {
 	API := r.Group(projectPath)
 	API.GET("/", DefaultRoot)
 	API.GET("/v1/hosted_zone/list", ListHostedZone)
-	API.GET("/v1/hosted_zone/create", CreateHostedZone)
+	API.POST("/v1/hosted_zone/create", CreateHostedZone)
 
 	GinFaas = ginAdapter.New(r)
 
