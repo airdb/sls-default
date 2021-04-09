@@ -1,0 +1,36 @@
+name: Go
+on: [push]
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          stable: 'true'
+          go-version: 1.14
+        id: go
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+
+      - name: Lint
+        run: |
+          go version
+          go mod download
+          go build -o main main.go
+          #go build -ldflags "-X github.com/airdb/adb/cmd.BuildTime=$timeNow" main.go
+
+      - name: Deploy Tecent scf
+        env:
+          APPID: ${{ secrets.TENCENT_APPID }}
+          REGION: ${{ secrets.TENCENT_REGION }}
+          SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
+          SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
+        run: |
+           pip --version
+           #sudo pip install scf
+           #scf configure set --appid $APPID --region $REGION --secret-id $SECRET_ID --secret-key $SECRET_KEY
+           #scf deploy -t template.yaml -f
