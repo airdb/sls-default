@@ -23,16 +23,7 @@ func NewRouter() {
 
 	API := r.Group(projectPath)
 	API.GET("/", DefaultRoot)
-	API.GET("/robot", QueryRobot)
-
-	API.GET("/lost/list", ListLost)
-	API.GET("/v1/lost/list", ListLost)
-	API.GET("/v1/article/list", ListLost)
-
-	API.GET("/article/query", QueryArticle)
-	API.GET("/v1/article/query", QueryArticle)
-
-	API.GET("/v1/reunion/list", ListReunion)
+	API.GET("/v1/hosted_zone/list", ListHostedZone)
 
 	GinFaas = ginAdapter.New(r)
 
