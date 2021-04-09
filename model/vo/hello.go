@@ -4,7 +4,7 @@ import (
 	"gorm.io/gorm"
 	"time"
 
-	"github.com/airdb/scf-mina/model/po"
+	"github.com/airdb/scf-airdb/model/po"
 )
 
 type HostedZone struct {
@@ -12,7 +12,6 @@ type HostedZone struct {
 	// CreatedAt time.Time  `json:"created_at"`
 	// UpdatedAt time.Time  `json:"updated_at"`
 	// DeletedAt *time.Time `json:"deleted_at,omitempty"`
-
 	HostedZone string    `json:"hosted_zone"`
 	Registry   string    `json:"registry"`
 	ExpiredAt  time.Time `json:"expired_at"`
@@ -36,6 +35,16 @@ func ToPoHostedZone(zone *HostedZone) *po.TabHostedZone {
 	}
 }
 
+type CreateHostedZoneReq struct {
+	HostedZone string    `json:"hosted_zone"`
+	Registry   string    `json:"registry"`
+	ExpiredAt  time.Time `json:"expired_at"`
+}
+
+type CreateHostedZoneResp struct {
+
+}
+
 type ListHostedZoneReq struct {
 	PageNo   int `form:"page_no"`
 	PageSize int `form:"page_size"`
@@ -55,4 +64,15 @@ func ListHostedZone(req *ListHostedZoneReq) *ListHostedZoneResp {
 	}
 
 	return &resp
+}
+
+func CreateHostedZone(req *CreateHostedZoneReq) *CreateHostedZoneResp{
+	zone := &HostedZone{
+		HostedZone: req.HostedZone,
+		Registry:   req.Registry,
+		ExpiredAt:  req.ExpiredAt,
+	}
+
+	po.CreateHostedZone(ToPoHostedZone(zone))
+	return &CreateHostedZoneResp{}
 }

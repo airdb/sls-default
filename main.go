@@ -7,9 +7,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/airdb/scf-mina/api"
-	"github.com/airdb/scf-mina/internal/version"
-	"github.com/airdb/scf-mina/model/po"
+	"github.com/airdb/scf-airdb/api"
+	"github.com/airdb/scf-airdb/internal/version"
+	"github.com/airdb/scf-airdb/model/po"
 	"github.com/serverless-plus/tencent-serverless-go/events"
 	ginAdapter "github.com/serverless-plus/tencent-serverless-go/gin"
 )

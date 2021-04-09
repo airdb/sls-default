@@ -1,4 +1,4 @@
-module github.com/airdb/scf-mina
+module github.com/airdb/scf-airdb
 
 go 1.16
 

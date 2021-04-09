@@ -3,7 +3,7 @@ SHELL = /bin/bash
 VERSION:=$(shell git describe --dirty --always)
 #VERSION := $(shell git describe --tags)
 BUILD := $(shell git rev-parse HEAD)
-REPO := github.com/airdb/scf-mina
+REPO := github.com/airdb/scf-airdb
 
 LDFLAGS=-ldflags
 LDFLAGS += "-X=$(REPO)/internal/version.Repo=$(REPO) \
