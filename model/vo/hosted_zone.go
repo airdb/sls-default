@@ -16,6 +16,7 @@ type HostedZone struct {
 	// DeletedAt *time.Time `json:"deleted_at,omitempty"`
 	HostedZone   string    `json:"hosted_zone"`
 	Registry     string    `json:"registry"`
+	Status       string    `json:"status"`
 	ExpiredAt    time.Time `json:"expired_at"`
 	RegisteredAt time.Time `json:"registered_at"`
 }
@@ -41,10 +42,11 @@ func ToPoHostedZone(zone *HostedZone) *po.TabHostedZone {
 }
 
 type CreateHostedZoneReq struct {
-	HostedZone    string `json:"hosted_zone"`
-	Registry      string `json:"registry"`
-	ExpiredDay    string `json:"expired_day,omitempty"`
-	RegisteredDay string `json:"registered_day,omitempty"`
+	HostedZone    string  `json:"hosted_zone"`
+	Registry      string  `json:"registry"`
+	ExpiredDay    *string `json:"expired_day"`
+	RegisteredDay *string `json:"registered_day"`
+	// RegisteredDay string  `json:"registered_day,omitempty"`
 	// ExpiredAt  time.Time `json:"expired_at"`
 }
 
@@ -65,8 +67,19 @@ func ListHostedZone(req *ListHostedZoneReq) *ListHostedZoneResp {
 
 	zones := po.ListHostedZone(req.PageNo, req.PageSize)
 
+	expiringHours := 1440 // 60 * 24
 	for _, z := range zones {
-		resp.HostedZones = append(resp.HostedZones, FromPoHostedZone(z))
+		_zone := FromPoHostedZone(z)
+		switch {
+		case time.Now().After(_zone.ExpiredAt):
+			_zone.Status = "expired"
+		case time.Now().Add(time.Duration(expiringHours) * time.Hour).After(_zone.ExpiredAt):
+			_zone.Status = "expiring"
+		default:
+			_zone.Status = "active"
+		}
+
+		resp.HostedZones = append(resp.HostedZones, _zone)
 	}
 
 	return &resp
@@ -81,12 +94,23 @@ func CreateHostedZone(req *CreateHostedZoneReq) *CreateHostedZoneResp {
 	}
 
 	fmt.Println("zone is ", zone)
-	t, err := time.Parse(timeutil.TimeFormatDay, req.ExpiredDay)
-	if err != nil {
-		return nil
+	if req.ExpiredDay != nil {
+		t, err := time.Parse(timeutil.TimeFormatDay, *req.ExpiredDay)
+		if err != nil {
+			return nil
+		}
+
+		zone.ExpiredAt = t
 	}
 
-	zone.ExpiredAt = t
+	if req.RegisteredDay != nil {
+		t, err := time.Parse(timeutil.TimeFormatDay, *req.RegisteredDay)
+		if err != nil {
+			return nil
+		}
+
+		zone.RegisteredAt = t
+	}
 
 	po.CreateHostedZone(ToPoHostedZone(zone))
 	return &CreateHostedZoneResp{}
