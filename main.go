@@ -11,13 +11,13 @@ import (
 )
 
 func main() {
-	//init the loc
+	// Init the loc.
 	loc, _ := time.LoadLocation("Asia/Shanghai")
 
-	//set timezone
+	// Set timezone.
 	version.CreatedAt = time.Now().In(loc)
 	fmt.Println(os.Getenv("AIRDB_DB_MINA_API_READ"))
 	po.InitDB()
 
-	web.NewRouter()
+	api.NewRouter()
 }

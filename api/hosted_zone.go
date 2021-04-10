@@ -1,4 +1,4 @@
-package web
+package api
 
 import (
 	"fmt"
@@ -6,6 +6,7 @@ import (
 
 	"github.com/airdb/scf-airdb/model/vo"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 )
 
 func ListHostedZone(c *gin.Context) {
@@ -25,8 +26,10 @@ func ListHostedZone(c *gin.Context) {
 
 func CreateHostedZone(c *gin.Context) {
 	var req vo.CreateHostedZoneReq
-	if err := c.ShouldBindQuery(&req); err != nil {
+
+	if err := c.ShouldBindBodyWith(&req, binding.JSON); err != nil {
 		c.JSON(http.StatusBadRequest, err)
+		fmt.Println("xxxxbad")
 
 		return
 	}

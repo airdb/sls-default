@@ -9,9 +9,10 @@ import (
 
 type TabHostedZone struct {
 	gorm.Model
-	HostedZone string
-	Registry   string
-	ExpiredAt  time.Time `gorm:"type:datetime"`
+	HostedZone   string
+	Registry     string
+	ExpiredAt    time.Time `gorm:"type:datetime"`
+	RegisteredAt time.Time `gorm:"type:datetime"`
 }
 
 func ListHostedZone(pageNo, pageSize int) []*TabHostedZone {
