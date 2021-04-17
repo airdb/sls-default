@@ -10,19 +10,19 @@ import (
 )
 
 type Response struct {
-	Success bool               `json:"success"`
-	Error   interface{}        `json:"error"`
-	Data json.RawMessage `json:"data"`
+	Success bool            `json:"success"`
+	Error   interface{}     `json:"error"`
+	Data    json.RawMessage `json:"data"`
 }
 
 func ListHostedZone(input *vo.ListHostedZoneReq,
 ) (*vo.ListHostedZoneResp, error) {
-	output :=Response{}
+	output := Response{}
 
 	client := sailor.NewHTTPClient()
 
 	client.SetDomain("scf.baobeihuijia.com")
-	client.SetEndpoint( "/test/airdb/v1/hosted_zone/list")
+	client.SetEndpoint("/test/airdb/v1/hosted_zone/list")
 	client.SetBody(&input)
 	client.SetUserAgent("scf-airdb/v0.0.1")
 
