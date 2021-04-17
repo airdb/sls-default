@@ -18,11 +18,12 @@ var rootCmd = &cobra.Command{
 }
 
 func initRoot() {
+	initDomainCmd()
+	initShell()
 }
 
 func Execute() {
 	initRoot()
-	initDomainCmd()
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)

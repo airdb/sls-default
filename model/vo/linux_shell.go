@@ -11,6 +11,7 @@ type LinuxShell struct {
 	// UpdatedAt time.Time  `json:"updated_at"`
 	// DeletedAt *time.Time `json:"deleted_at,omitempty"`
 	Command string
+	Shell   string
 	Tags    string
 	Comment string
 	Ref     string
@@ -20,6 +21,7 @@ func FromPoLinuxShell(shell *po.TabLinuxShell) *LinuxShell {
 	return &LinuxShell{
 		ID:      shell.ID,
 		Command: shell.Command,
+		Shell:   shell.Shell,
 		Tags:    shell.Tags,
 		Comment: shell.Comment,
 		Ref:     shell.Ref,
@@ -31,6 +33,7 @@ func ToPoLinuxShell(shell *LinuxShell) *po.TabLinuxShell {
 		Model:   gorm.Model{},
 		Command: shell.Command,
 		Tags:    shell.Tags,
+		Shell:   shell.Shell,
 		Comment: shell.Comment,
 		Ref:     shell.Ref,
 	}
@@ -39,6 +42,7 @@ func ToPoLinuxShell(shell *LinuxShell) *po.TabLinuxShell {
 type CreateLinuxShellReq struct {
 	Command string `json:"command"`
 	Comment string `json:"comment"`
+	Shell   string `json:"shell"`
 	Ref     string `json:"ref"`
 	Tags    string `json:"tags"`
 }
@@ -73,6 +77,7 @@ func CreateLinuxShell(req *CreateLinuxShellReq) *CreateLinuxShellResp {
 	shell := &LinuxShell{
 		Command: req.Command,
 		Tags:    req.Tags,
+		Shell:   req.Shell,
 		Comment: req.Comment,
 		Ref:     req.Ref,
 	}

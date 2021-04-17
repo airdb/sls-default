@@ -8,6 +8,7 @@ import (
 type TabLinuxShell struct {
 	gorm.Model
 	Command string
+	Shell   string
 	Tags    string
 	Comment string
 	Ref     string
