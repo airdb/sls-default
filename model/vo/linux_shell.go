@@ -40,9 +40,9 @@ func ToPoLinuxShell(shell *LinuxShell) *po.TabLinuxShell {
 }
 
 type CreateLinuxShellReq struct {
-	Command string `json:"command"`
+	Command string `json:"command" binding:"required"`
 	Comment string `json:"comment"`
-	Shell   string `json:"shell"`
+	Shell   string `json:"shell" binding:"required"`
 	Ref     string `json:"ref"`
 	Tags    string `json:"tags"`
 }

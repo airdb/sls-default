@@ -10,8 +10,8 @@ import (
 	"github.com/pkg/errors"
 )
 
-func ListLinuxShell(input *vo.ListHostedZoneReq,
-) (*vo.ListHostedZoneResp, error) {
+func ListLinuxShell(input *vo.ListLinuxShellReq,
+) (*vo.ListLinuxShellResp, error) {
 	output := Response{}
 
 	client := sailor.NewHTTPClient()
@@ -20,13 +20,14 @@ func ListLinuxShell(input *vo.ListHostedZoneReq,
 	client.SetEndpoint("/test/airdb/v1/shell/list")
 	client.SetBody(&input)
 	client.SetUserAgent("scf-airdb/v0.0.1")
+	client.SetDebug()
 
 	if err := client.HTTPRequest(client, &output); err != nil {
 		fmt.Println(err)
 		return nil, errors.Wrap(err, "request failed")
 	}
 
-	res := vo.ListHostedZoneResp{}
+	res := vo.ListLinuxShellResp{}
 	err := json.Unmarshal(output.Data, &res)
 	if err != nil {
 		return nil, errors.Wrap(err, "unmarshal fail")

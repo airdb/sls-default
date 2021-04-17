@@ -16,6 +16,7 @@ limitations under the License.
 package cmd
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/airdb/scf-airdb/model/vo"
@@ -29,6 +30,16 @@ var shellCmd = &cobra.Command{
 	Short:   "A brief description of your command",
 	Example: createShellExample,
 	Run: func(cmd *cobra.Command, args []string) {
+		ListShell()
+	},
+}
+
+// shellCmd represents the shell command
+var addShellCmd = &cobra.Command{
+	Use:     "add",
+	Short:   "A brief description of your command",
+	Example: createShellExample,
+	Run: func(cmd *cobra.Command, args []string) {
 		createShell()
 	},
 }
@@ -36,11 +47,26 @@ var shellCmd = &cobra.Command{
 func initShell() {
 	rootCmd.AddCommand(shellCmd)
 
-	shellCmd.PersistentFlags().StringVarP(&createShellFlags.Command, "command", "c", "", "command")
-	shellCmd.PersistentFlags().StringVarP(&createShellFlags.Shell, "shell", "s", "", "shell")
-	shellCmd.PersistentFlags().StringVarP(&createShellFlags.Comment, "comment", "", "", "comment")
-	shellCmd.PersistentFlags().StringVarP(&createShellFlags.Ref, "ref", "r", "", "ref")
-	shellCmd.PersistentFlags().StringVarP(&createShellFlags.Tags, "tag", "t", "", "tag")
+	shellCmd.AddCommand(addShellCmd)
+
+	addShellCmd.PersistentFlags().StringVarP(&createShellFlags.Command, "command", "c", "", "command")
+	addShellCmd.PersistentFlags().StringVarP(&createShellFlags.Shell, "shell", "s", "", "shell")
+	addShellCmd.PersistentFlags().StringVarP(&createShellFlags.Comment, "comment", "", "", "comment")
+	addShellCmd.PersistentFlags().StringVarP(&createShellFlags.Ref, "ref", "r", "", "ref")
+	addShellCmd.PersistentFlags().StringVarP(&createShellFlags.Tags, "tag", "t", "", "tag")
+}
+
+var listShellFlags vo.ListLinuxShellReq
+
+func ListShell() {
+	resp, err := airsdk.ListLinuxShell(&listShellFlags)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	for _, shell := range resp.Shells {
+		fmt.Println(*shell)
+	}
 }
 
 var createShellFlags vo.CreateLinuxShellReq
