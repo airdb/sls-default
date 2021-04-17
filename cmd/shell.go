@@ -27,12 +27,7 @@ import (
 var shellCmd = &cobra.Command{
 	Use:   "shell",
 	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Example: "",
 	Run: func(cmd *cobra.Command, args []string) {
 		createShell()
 	},
@@ -40,16 +35,18 @@ to quickly create a Cobra application.`,
 
 func initShell() {
 	rootCmd.AddCommand(shellCmd)
+
+	shellCmd.PersistentFlags().StringVarP(&createShellFlags.Command, "command", "c", "", "command")
+	shellCmd.PersistentFlags().StringVarP(&createShellFlags.Shell, "shell", "s", "", "shell")
+	shellCmd.PersistentFlags().StringVarP(&createShellFlags.Comment, "comment", "", "", "comment")
+	shellCmd.PersistentFlags().StringVarP(&createShellFlags.Ref, "ref", "r", "", "ref")
+	shellCmd.PersistentFlags().StringVarP(&createShellFlags.Tags, "tag", "t", "", "tag")
 }
 
+var createShellFlags vo.CreateLinuxShellReq
+
 func createShell() {
-	resp, err := airsdk.CreateLinuxShell(&vo.CreateLinuxShellReq{
-		Command: "mc",
-		Comment: "",
-		Shell:   "wget https://dl.min.io/client/mc/release/linux-amd64/archive/mc.RELEASE.2019-10-02T19-41-02Z",
-		Ref:     "",
-		Tags:    "minio",
-	})
+	resp, err := airsdk.CreateLinuxShell(&createShellFlags)
 	if err != nil {
 		log.Fatalln(err)
 	}
