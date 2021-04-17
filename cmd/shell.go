@@ -25,9 +25,9 @@ import (
 
 // shellCmd represents the shell command
 var shellCmd = &cobra.Command{
-	Use:   "shell",
-	Short: "A brief description of your command",
-	Example: "",
+	Use:     "shell",
+	Short:   "A brief description of your command",
+	Example: createShellExample,
 	Run: func(cmd *cobra.Command, args []string) {
 		createShell()
 	},
