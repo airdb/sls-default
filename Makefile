@@ -15,6 +15,7 @@ default: build deploy
 
 build:
 	GOOS=linux go build $(LDFLAGS) -o main main.go
+	GOOS=linux go build $(LDFLAGS) -o cli cmd/cli/main.go
 
 deploy:
 	sls deploy --stage test
