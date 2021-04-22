@@ -20,6 +20,7 @@ var rootCmd = &cobra.Command{
 func initRoot() {
 	initDomainCmd()
 	initShell()
+	initDailyEnglish()
 }
 
 func Execute() {
