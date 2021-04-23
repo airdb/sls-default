@@ -1,5 +1,5 @@
 /*
-Copyright Â© 2021 NAME HERE <EMAIL ADDRESS>
+Copyright
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -45,14 +45,26 @@ var addDailyEnglishCmd = &cobra.Command{
 	},
 }
 
+// shellCmd represents the shell command
+var listDailyEnglishCmd = &cobra.Command{
+	Use:     "list",
+	Short:   "A brief description of your command",
+	Aliases: []string{"ls"},
+	Example: createDailyEnglishExample,
+	Run: func(cmd *cobra.Command, args []string) {
+		ListDailyEnglish()
+	},
+}
+
 func initDailyEnglish() {
 	rootCmd.AddCommand(dailyEnglishCmd)
 
+	dailyEnglishCmd.AddCommand(listDailyEnglishCmd)
 	dailyEnglishCmd.AddCommand(addDailyEnglishCmd)
 
-	addDailyEnglishCmd.PersistentFlags().StringVarP(&createDailyEnglishFlags.Cn, "chinese", "", "", "command")
+	addDailyEnglishCmd.PersistentFlags().StringVarP(&createDailyEnglishFlags.Cn, "chinese", "c", "", "command")
 	addDailyEnglishCmd.PersistentFlags().StringVarP(&createDailyEnglishFlags.En, "english", "e", "", "comment")
-	addDailyEnglishCmd.PersistentFlags().StringVarP(&createDailyEnglishFlags.Category, "category", "c", "", "category")
+	addDailyEnglishCmd.PersistentFlags().StringVarP(&createDailyEnglishFlags.Category, "category", "", "", "category")
 	addDailyEnglishCmd.PersistentFlags().StringVarP(&createDailyEnglishFlags.Tags, "tag", "t", "", "tag")
 }
 
@@ -65,7 +77,10 @@ func ListDailyEnglish() {
 	}
 
 	for _, shell := range resp.En {
-		fmt.Println(*shell)
+		fmt.Println(shell.ID)
+		fmt.Println(shell.En)
+		fmt.Println(shell.Cn)
+		fmt.Println()
 	}
 }
 

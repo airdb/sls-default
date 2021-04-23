@@ -20,7 +20,7 @@ func ListDailyEnglish(input *vo.ListDailyEnglishReq,
 	client.SetEndpoint("/test/airdb/v1/english/list")
 	client.SetBody(&input)
 	client.SetUserAgent("scf-airdb/v0.0.1")
-	client.SetDebug()
+	// client.SetDebug()
 
 	if err := client.HTTPRequest(client, &output); err != nil {
 		fmt.Println(err)
