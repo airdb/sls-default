@@ -27,8 +27,6 @@ func ListLinuxShell(input *vo.ListLinuxShellReq,
 		return nil, errors.Wrap(err, "request failed")
 	}
 
-	fmt.Println("112")
-	fmt.Println("11")
 	res := vo.ListLinuxShellResp{}
 	err := json.Unmarshal(output.Data, &res)
 	if err != nil {
