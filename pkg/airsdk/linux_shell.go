@@ -20,13 +20,15 @@ func ListLinuxShell(input *vo.ListLinuxShellReq,
 	client.SetEndpoint("/test/airdb/v1/shell/list")
 	client.SetBody(&input)
 	client.SetUserAgent("scf-airdb/v0.0.1")
-	client.SetDebug()
+	// client.SetDebug()
 
 	if err := client.HTTPRequest(client, &output); err != nil {
 		fmt.Println(err)
 		return nil, errors.Wrap(err, "request failed")
 	}
 
+	fmt.Println("112")
+	fmt.Println("11")
 	res := vo.ListLinuxShellResp{}
 	err := json.Unmarshal(output.Data, &res)
 	if err != nil {

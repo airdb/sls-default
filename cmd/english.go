@@ -1,5 +1,5 @@
 /*
-Copyright © 2021 NAME HERE <EMAIL ADDRESS>
+Copyright Â© 2021 NAME HERE <EMAIL ADDRESS>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ func initDailyEnglish() {
 
 	dailyEnglishCmd.AddCommand(addDailyEnglishCmd)
 
-	addDailyEnglishCmd.PersistentFlags().StringVarP(&createDailyEnglishFlags.Cn, "chinese", "c", "", "command")
+	addDailyEnglishCmd.PersistentFlags().StringVarP(&createDailyEnglishFlags.Cn, "chinese", "", "", "command")
 	addDailyEnglishCmd.PersistentFlags().StringVarP(&createDailyEnglishFlags.En, "english", "e", "", "comment")
 	addDailyEnglishCmd.PersistentFlags().StringVarP(&createDailyEnglishFlags.Category, "category", "c", "", "category")
 	addDailyEnglishCmd.PersistentFlags().StringVarP(&createDailyEnglishFlags.Tags, "tag", "t", "", "tag")

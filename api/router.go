@@ -19,7 +19,7 @@ func NewRouter() {
 	r := gin.Default()
 
 	projectPath := "/airdb"
-	r.GET(projectPath, DefaultRoot)
+	r.GET(projectPath, DefaultString)
 
 	API := r.Group(projectPath)
 	API.GET("/", DefaultRoot)

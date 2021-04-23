@@ -44,6 +44,7 @@ inputs:
           environment: ${stage}
           endpoints:
             - path: /${name}
+              apiName: ${name}
               method: ANY
               function:
                 isIntegratedResponse: true
