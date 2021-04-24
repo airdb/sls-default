@@ -44,6 +44,7 @@ type CreateDailyEnglishReq struct {
 }
 
 type CreateDailyEnglishResp struct {
+	ID uint `json:"id"`
 }
 
 type ListDailyEnglishReq struct {
@@ -77,6 +78,14 @@ func CreateDailyEnglish(req *CreateDailyEnglishReq) *CreateDailyEnglishResp {
 		Category: req.Category,
 	}
 
-	po.CreateDailyEnglish(ToPoDailyEnglish(en))
-	return &CreateDailyEnglishResp{}
+	var resp CreateDailyEnglishResp
+
+	_en, err := po.CreateDailyEnglish(ToPoDailyEnglish(en))
+	if err != nil {
+		return &resp
+	}
+
+	resp.ID = _en.ID
+
+	return &resp
 }

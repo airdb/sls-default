@@ -26,6 +26,7 @@ func ListDailyEnglish(pageNo, pageSize int) []*TabDailyEnglish {
 	return shells
 }
 
-func CreateDailyEnglish(en *TabDailyEnglish) {
-	dbutil.WriteDB(dbMasterWrite).Create(&en)
+func CreateDailyEnglish(en *TabDailyEnglish) (*TabDailyEnglish, error) {
+	db := dbutil.WriteDB(dbMasterWrite).Create(&en)
+	return en, db.Error
 }
