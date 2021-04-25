@@ -3,7 +3,7 @@ module github.com/airdb/scf-airdb
 go 1.16
 
 require (
-	airdb.io/airdb/sailor v0.0.8
+	airdb.io/airdb/sailor v0.0.11
 	github.com/MakeNowJust/heredoc v1.0.0
 	github.com/gin-gonic/gin v1.7.1
 	github.com/pkg/errors v0.8.1
