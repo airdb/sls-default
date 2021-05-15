@@ -32,6 +32,9 @@ func NewRouter() {
 	API.GET("/v1/english/list", ListDailyEnglish)
 	API.POST("/v1/english/create", CreateDailyEnglish)
 
+	API.GET("/v1/noah/tree", ListNoahTree)
+	API.GET("/v1/noah/list", ListNoah)
+
 	GinFaas = ginAdapter.New(r)
 
 	faas.Start(Handler)
