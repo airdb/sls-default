@@ -34,6 +34,7 @@ func NewRouter() {
 
 	API.GET("/v1/noah/tree", ListNoahTree)
 	API.GET("/v1/noah/list", ListNoah)
+	API.GET("/v1/noah/user", QueryUser)
 
 	GinFaas = ginAdapter.New(r)
 

@@ -24,3 +24,6 @@ deploy:
 release:
 	sls deploy --stage release
 	@echo checkout all scf apps, https://serverless.cloud.tencent.com/
+
+docker:
+	docker run -it --platform linux/amd64 -v `pwd`:/srv node bash

@@ -99,3 +99,19 @@ func ListTree() *Tree {
 
 	return &root
 }
+
+type UserResp struct {
+	Success bool `json:"success"`
+	Data    struct {
+		Username string `json:"userName"`
+		UserName string `json:"user-name"`
+	} `json:"data"`
+}
+
+func QueryUser() (resp *UserResp){
+	resp.Success = true
+	resp.Data.Username = "deancn"
+	resp.Data.Username = "deancn"
+
+	return resp
+}
