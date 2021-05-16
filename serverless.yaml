@@ -48,6 +48,7 @@ inputs:
             - path: /${name}
               apiName: ${name}
               method: ANY
+              enableCORS: true
               function:
                 isIntegratedResponse: true
                 functionQualifier: $DEFAULT

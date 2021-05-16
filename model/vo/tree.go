@@ -108,10 +108,12 @@ type UserResp struct {
 	} `json:"data"`
 }
 
-func QueryUser() (resp *UserResp){
+func QueryUser() *UserResp {
+	var resp UserResp
+
 	resp.Success = true
 	resp.Data.Username = "deancn"
 	resp.Data.Username = "deancn"
 
-	return resp
+	return &resp
 }
