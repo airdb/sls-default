@@ -101,19 +101,15 @@ func ListTree() *Tree {
 }
 
 type UserResp struct {
-	Success bool `json:"success"`
-	Data    struct {
 		Username string `json:"userName"`
 		UserName string `json:"user-name"`
-	} `json:"data"`
 }
 
 func QueryUser() *UserResp {
 	var resp UserResp
 
-	resp.Success = true
-	resp.Data.Username = "deancn"
-	resp.Data.Username = "deancn"
+	resp.Username = "deancn"
+	resp.Username = "deancn"
 
 	return &resp
 }

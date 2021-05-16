@@ -26,4 +26,4 @@ release:
 	@echo checkout all scf apps, https://serverless.cloud.tencent.com/
 
 docker:
-	docker run -it --platform linux/amd64 -v `pwd`:/srv node bash
+	docker run --platform linux/amd64 -it -v $(HOME)/go:/go airdb/serverless bash
