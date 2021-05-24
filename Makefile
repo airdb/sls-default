@@ -25,5 +25,11 @@ release:
 	sls deploy --stage release
 	@echo checkout all scf apps, https://serverless.cloud.tencent.com/
 
+log:
+	sls logs --tail --stage test
+
+logrelease:
+	sls logs --tail --stage release
+
 docker:
 	docker run --platform linux/amd64 -it -v $(HOME)/go:/go airdb/serverless bash
