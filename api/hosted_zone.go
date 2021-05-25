@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/airdb/scf-airdb/model/vo"
+	"github.com/airdb/scf-noah/model/vo"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 )

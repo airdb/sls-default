@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"airdb.io/airdb/sailor"
-	"github.com/airdb/scf-airdb/model/vo"
+	"github.com/airdb/scf-noah/model/vo"
 	"github.com/pkg/errors"
 )
 
@@ -24,7 +24,7 @@ func ListHostedZone(input *vo.ListHostedZoneReq,
 	client.SetDomain("scf.baobeihuijia.com")
 	client.SetEndpoint("/test/airdb/v1/hosted_zone/list")
 	client.SetBody(&input)
-	client.SetUserAgent("scf-airdb/v0.0.1")
+	client.SetUserAgent("scf-noah/v0.0.1")
 
 	if err := client.HTTPRequest(client, &output); err != nil {
 		fmt.Println(err)

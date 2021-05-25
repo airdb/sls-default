@@ -5,9 +5,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/airdb/scf-airdb/api"
-	"github.com/airdb/scf-airdb/internal/version"
-	"github.com/airdb/scf-airdb/model/po"
+	"github.com/airdb/scf-noah/api"
+	"github.com/airdb/scf-noah/internal/version"
+	"github.com/airdb/scf-noah/model/po"
 )
 
 func main() {

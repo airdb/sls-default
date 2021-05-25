@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"airdb.io/airdb/sailor/timeutil"
-	"github.com/airdb/scf-airdb/model/po"
+	"github.com/airdb/scf-noah/model/po"
 	"gorm.io/gorm"
 )
 

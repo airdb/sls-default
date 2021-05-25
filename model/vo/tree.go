@@ -101,8 +101,8 @@ func ListTree() *Tree {
 }
 
 type UserResp struct {
-		Username string `json:"userName"`
-		UserName string `json:"user-name"`
+	Username string `json:"userName"`
+	UserName string `json:"user-name"`
 }
 
 func QueryUser() *UserResp {

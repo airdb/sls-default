@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/airdb/scf-airdb/internal/version"
+	"github.com/airdb/scf-noah/internal/version"
 	"github.com/spf13/cobra"
 )
 
@@ -19,8 +19,6 @@ var rootCmd = &cobra.Command{
 
 func initRoot() {
 	initDomainCmd()
-	initShell()
-	initDailyEnglish()
 }
 
 func Execute() {

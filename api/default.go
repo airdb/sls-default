@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	"github.com/airdb/scf-airdb/internal/version"
+	"github.com/airdb/scf-noah/internal/version"
 	"github.com/gin-gonic/gin"
 )
 

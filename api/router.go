@@ -18,24 +18,11 @@ func NewRouter() {
 
 	r := gin.Default()
 
-	projectPath := "/airdb"
+	projectPath := "/noah"
 	r.GET(projectPath, DefaultString)
 
 	API := r.Group(projectPath)
 	API.GET("/", DefaultRoot)
-	API.GET("/v1/hosted_zone/list", ListHostedZone)
-	API.POST("/v1/hosted_zone/create", CreateHostedZone)
-
-	API.GET("/v1/shell/list", ListLinuxShell)
-	API.POST("/v1/shell/create", CreateLinuxShell)
-
-	API.GET("/v1/english/list", ListDailyEnglish)
-	API.POST("/v1/english/create", CreateDailyEnglish)
-
-	API.GET("/v1/noah/tree", ListNoahTree)
-	API.GET("/v1/noah/list", ListNoah)
-	API.GET("/v1/noah/user", QueryUser)
-	API.POST("/v1/noah/user", QueryUser)
 
 	GinFaas = ginAdapter.New(r)
 

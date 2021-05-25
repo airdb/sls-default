@@ -19,8 +19,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/airdb/scf-airdb/model/vo"
-	"github.com/airdb/scf-airdb/pkg/airsdk"
+	"github.com/airdb/scf-noah/model/vo"
+	"github.com/airdb/scf-noah/pkg/airsdk"
 	"github.com/spf13/cobra"
 )
 
