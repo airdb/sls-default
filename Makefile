@@ -18,7 +18,7 @@ build:
 	GOOS=linux go build $(LDFLAGS) -o cli cmd/cli/main.go
 
 deploy:
-	sls deploy --stage test
+	SERVERLESS_PLATFORM_VENDOR=tencent GLOBAL_ACCELERATOR_NA=true sls deploy --stage test
 	@echo checkout all scf apps, https://serverless.cloud.tencent.com/
 
 release:
