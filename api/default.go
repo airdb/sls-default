@@ -2,8 +2,9 @@ package api
 
 import (
 	"net/http"
+	"strings"
 
-	"github.com/airdb/scf-noah/internal/version"
+	"github.com/airdb/scf-go/internal/version"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,5 +15,14 @@ func DefaultRoot(c *gin.Context) {
 }
 
 func DefaultString(c *gin.Context) {
-	c.String(http.StatusOK, "this is a string")
+	modules := []string{
+		"airdb/scf-noah",
+		"airdb/scf-airdb",
+		"airdb/scf-oauth2",
+		"airdb/scf-wechat",
+		"airdb/scf-mina",
+		"airdb/scf-svgo",
+	}
+
+	c.String(http.StatusOK, strings.Join(modules, "<br>"))
 }

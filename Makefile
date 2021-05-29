@@ -3,7 +3,7 @@ SHELL = /bin/bash
 VERSION:=$(shell git describe --dirty --always)
 #VERSION := $(shell git describe --tags)
 BUILD := $(shell git rev-parse HEAD)
-REPO := github.com/airdb/scf-noah
+REPO := github.com/airdb/scf-go
 
 LDFLAGS=-ldflags
 LDFLAGS += "-X=$(REPO)/internal/version.Repo=$(REPO) \
@@ -15,7 +15,6 @@ default: build deploy
 
 build:
 	GOOS=linux go build $(LDFLAGS) -o main main.go
-	GOOS=linux go build $(LDFLAGS) -o cli cmd/cli/main.go
 
 deploy:
 	SERVERLESS_PLATFORM_VENDOR=tencent GLOBAL_ACCELERATOR_NA=true sls deploy --stage test

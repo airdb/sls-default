@@ -1,4 +1,4 @@
-module github.com/airdb/scf-noah
+module github.com/airdb/scf-go
 
 go 1.16
 

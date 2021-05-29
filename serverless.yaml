@@ -6,7 +6,7 @@ app: 'bbhj' # 应用名称。留空则默认取当前组件的实例名称为app
 stage: ${env.STAGE} # 环境名称。默认值是 dev。建议使用${env.STAGE}变量定义环境名称
 
 component: scf
-name: noah
+name: index
 
 inputs:
   src:
@@ -17,7 +17,7 @@ inputs:
   region: ap-shanghai
   runtime: Go1
   handler: main
-  description: https://scf.baobeihuijia.com/${stage}/${name}/
+  description: https://scf.baobeihuijia.com/${stage}/
   memorySize: 128 # 内存大小，单位MB
   timeout: 20 # 函数执行超时时间，单位秒
   initTimeout: 3 # 初始化超时时间，单位秒
@@ -46,7 +46,7 @@ inputs:
             - https
           environment: ${stage}
           endpoints:
-            - path: /${name}
+            - path: /
               apiName: ${name}
               method: ANY
               enableCORS: true

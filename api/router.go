@@ -18,11 +18,11 @@ func NewRouter() {
 
 	r := gin.Default()
 
-	projectPath := "/noah"
-	r.GET(projectPath, DefaultString)
+	projectPath := "/index"
+	r.GET("/", DefaultRoot)
 
 	API := r.Group(projectPath)
-	API.GET("/", DefaultRoot)
+	API.GET("/*", DefaultString)
 
 	GinFaas = ginAdapter.New(r)
 
