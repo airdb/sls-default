@@ -17,10 +17,12 @@ build:
 	GOOS=linux go build $(LDFLAGS) -o main main.go
 
 deploy:
+	swag init --generalInfo api/router.go --output ./docs
 	SERVERLESS_PLATFORM_VENDOR=tencent GLOBAL_ACCELERATOR_NA=true sls deploy --stage test
 	@echo checkout all scf apps, https://serverless.cloud.tencent.com/
 
 release:
+	swag init --generalInfo api/router.go --output ./docs
 	sls deploy --stage release
 	@echo checkout all scf apps, https://serverless.cloud.tencent.com/
 

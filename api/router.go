@@ -33,8 +33,7 @@ var GinFaas *ginAdapter.GinFaas
 // @in header
 // @name Authorization
 
-// @host petstore.swagger.io
-// @BasePath /v2
+// @BasePath /test/
 func NewRouter() {
 	fmt.Printf("Gin start")
 

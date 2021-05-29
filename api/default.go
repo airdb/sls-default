@@ -24,7 +24,7 @@ func DefaultRoot(c *gin.Context) {
 // @Success 200 {string} string	"ok"
 // @Failure 400 {object} string "We need ID!!"
 // @Failure 404 {object} string "Can not find ID"
-// @Router /testapi/get-struct-array-by-string/{some_id} [get]
+// @Router /test/index [get]
 func DefaultString(c *gin.Context) {
 	modules := []string{
 		"airdb/scf-noah",
