@@ -28,9 +28,12 @@ var GinFaas *ginAdapter.GinFaas
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
+
 // @host petstore.swagger.io
 // @BasePath /v2
-// @Param Authorization header string true "Bearer"
 func NewRouter() {
 	fmt.Printf("Gin start")
 

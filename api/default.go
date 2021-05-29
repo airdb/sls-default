@@ -14,6 +14,7 @@ func DefaultRoot(c *gin.Context) {
 	})
 }
 
+// @Security ApiKeyAuth
 func DefaultString(c *gin.Context) {
 	modules := []string{
 		"airdb/scf-noah",
