@@ -24,5 +24,5 @@ func DefaultString(c *gin.Context) {
 		"airdb/scf-svgo",
 	}
 
-	c.String(http.StatusOK, strings.Join(modules, "<br>"))
+	c.String(http.StatusOK, strings.Join(modules, "\n"))
 }
