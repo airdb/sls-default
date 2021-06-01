@@ -3,7 +3,7 @@ package main
 import (
 	"time"
 
-	"github.com/airdb/scf-go/api"
+	"github.com/airdb/scf-go/internal/app/adapter"
 	"github.com/airdb/scf-go/internal/version"
 )
 
@@ -14,5 +14,5 @@ func main() {
 	// Set timezone.
 	version.CreatedAt = time.Now().In(loc)
 
-	api.NewRouter()
+	adapter.NewRouter()
 }
