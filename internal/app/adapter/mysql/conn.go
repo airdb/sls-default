@@ -1,4 +1,4 @@
-package postgresql
+package mysql
 
 import (
 	"fmt"
@@ -14,7 +14,7 @@ const (
 	maxOpenConn = 100
 )
 
-// Connection gets connection of postgresql database
+// Connection gets connection of mysql database
 func Connection() (db *gorm.DB) {
 	host := viper.Get("PGHOST")
 	user := viper.Get("PGUSER")

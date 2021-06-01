@@ -4,14 +4,14 @@ import (
 	"github.com/airdb/scf-go/internal/app/domain"
 )
 
-// Order is the factory of domain.Order
+// Order is the factory of domain.User
 type Order struct{}
 
-// Generate generates domain.Order from primitives
+// Generate generates domain.User from primitives
 func (of Order) Generate(
 	orderID string,
-) domain.Order {
-	return domain.Order{
+) domain.User {
+	return domain.User{
 		ID: orderID,
 	}
 }

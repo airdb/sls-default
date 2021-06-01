@@ -21,15 +21,6 @@ func (b Bitbank) Ticker(p valueobject.Pair) valueobject.Ticker {
 	}
 }
 
-// Ohlc gets open, high, low, and close via bitbank public api
-// NOTICE: This works from 0AM (UTC) due to its api constraints
-func (b Bitbank) Ohlc(p valueobject.Pair, t valueobject.Timeunit) []valueobject.CandleStick {
-	var resp []valueobject.CandleStick
-	resp = append(resp, valueobject.CandleStick{})
-
-	return resp
-}
-
 /*
 func convertToCandlestick(res bitbankohlcresponse) []valueobject.CandleStick {
 	ohlcs := res.Data.Candlestick[0].Ohlcv

@@ -99,7 +99,7 @@ And then, please try [Getting Started](#getting-started) again.
 │   └── app
 │       ├── adapter
 │       │   ├── controller.go                 # Controller
-│       │   ├── postgresql                    # Database
+│       │   ├── mysql                    # Database
 │       │   │   ├── conn.go
 │       │   │   └── model                     # Database Model
 │       │   │       ├── card.go
@@ -595,8 +595,8 @@ That's it!
 ```zsh
 ~/go/src/github.com/resotto/goilerplate (master) > go test ./internal/app/...
 ?       github.com/resotto/goilerplate/internal/app/adapter     [no test files]
-?       github.com/resotto/goilerplate/internal/app/adapter/postgresql  [no test files]
-?       github.com/resotto/goilerplate/internal/app/adapter/postgresql/model    [no test files]
+?       github.com/resotto/goilerplate/internal/app/adapter/mysql  [no test files]
+?       github.com/resotto/goilerplate/internal/app/adapter/mysql/model    [no test files]
 ?       github.com/resotto/goilerplate/internal/app/adapter/repository  [no test files]
 ?       github.com/resotto/goilerplate/internal/app/adapter/service     [no test files]
 ?       github.com/resotto/goilerplate/internal/app/application/service [no test files]
