@@ -9,3 +9,8 @@ import (
 func Ticker(e service.IExchange, p valueobject.Pair) valueobject.Ticker {
 	return e.Ticker(p)
 }
+
+func GetUser(e service.IExchange) valueobject.User {
+
+	return e.GetUser()
+}

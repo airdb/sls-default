@@ -4,6 +4,12 @@ import (
 	"github.com/airdb/scf-go/internal/app/domain/valueobject"
 )
 
+func (b Bitbank)  GetUser() valueobject.User {
+	return valueobject.User{
+		ID:       111,
+		Username: "dean",
+	}
+}
 // Bitbank is an bitcoin exchange
 type Bitbank struct{}
 

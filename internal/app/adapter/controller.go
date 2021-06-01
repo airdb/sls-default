@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/airdb/scf-go/internal/app/adapter/service"
 	"github.com/airdb/scf-go/internal/app/application/usecase"
+	service "github.com/airdb/scf-go/internal/app/domain/service"
 	"github.com/airdb/scf-go/internal/app/domain/valueobject"
 	"github.com/airdb/scf-go/internal/version"
 
@@ -19,10 +19,13 @@ import (
 	ginAdapter "github.com/serverless-plus/tencent-serverless-go/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+
+	_ "github.com/airdb/scf-go/docs"
 )
 
 var (
 	bitbank = service.Bitbank{}
+	user = service.Bitbank{}
 	// parameterRepository = repository.Parameter{}
 	// orderRepository     = repository.Order{}
 )
@@ -32,21 +35,7 @@ type Controller struct{}
 
 // Handler serverless faas handler.
 func Handler(ctx context.Context, req events.APIGatewayRequest) (events.APIGatewayResponse, error) {
-	var (
-		res, _ = GinFaas.ProxyWithContext(ctx, req)
-		apiRes = events.APIGatewayResponse{Body: res.Body, StatusCode: http.StatusOK}
-	)
-
-	apiRes.Headers = res.Headers
-
-	fmt.Println(apiRes.Headers)
-
-	// if apiRes.Headers == nil {
-	// 	apiRes.Headers = make(map[string]string)
-	// 	apiRes.Headers["Content-Type"] = "application/json"
-	// }
-
-	return apiRes, nil
+	return GinFaas.ProxyWithContext(ctx, req)
 }
 
 var GinFaas *ginAdapter.GinFaas
@@ -85,6 +74,8 @@ func NewRouter() {
 	r.GET("/hello", index)
 
 	r.GET("/ticker", ticker)
+	r.GET("/user/query", getUser)
+
 	if os.Getenv("env") == "dev" {
 		defaultAddr := ":8081"
 		err := r.Run(defaultAddr)
@@ -140,4 +131,9 @@ func ticker(c *gin.Context) {
 	pair := valueobject.BtcJpy
 	ticker := usecase.Ticker(bitbank, pair) // Dependency Injection
 	c.JSON(http.StatusOK, ticker)
+}
+
+func getUser(c *gin.Context) {
+	user := usecase.GetUser(user)
+	c.JSON(http.StatusOK, user)
 }

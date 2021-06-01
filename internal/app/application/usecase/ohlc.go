@@ -11,8 +11,3 @@ type OhlcArgs struct {
 	P valueobject.Pair
 	T valueobject.Timeunit
 }
-
-// Ohlc is the usecase of getting open, high, low, and close
-func Ohlc(a OhlcArgs) []valueobject.CandleStick {
-	return a.E.Ohlc(a.P, a.T)
-}
