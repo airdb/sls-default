@@ -53,7 +53,10 @@ func (o Order) Update(order domain.Order) {
 
 	err := db.Transaction(func(tx *gorm.DB) error {
 		var err error
-		err = tx.Exec("update persons set name = ?, weight = ? where person_id = ?", person.Name, person.Weight, person.ID).Error
+		err = tx.Exec("update persons set name = ?, weight = ? where person_id = ?",
+			person.Name,
+			person.Weight,
+			person.ID).Error
 		if err != nil {
 			return errors.New("rollback")
 		}

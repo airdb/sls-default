@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"os"
 	"strings"
 
-	"github.com/airdb/scf-go/internal/app/adapter/repository"
 	"github.com/airdb/scf-go/internal/app/adapter/service"
 	"github.com/airdb/scf-go/internal/app/application/usecase"
 	"github.com/airdb/scf-go/internal/app/domain/valueobject"
@@ -22,9 +22,9 @@ import (
 )
 
 var (
-	bitbank             = service.Bitbank{}
-	parameterRepository = repository.Parameter{}
-	orderRepository     = repository.Order{}
+	bitbank = service.Bitbank{}
+	// parameterRepository = repository.Parameter{}
+	// orderRepository     = repository.Order{}
 )
 
 // Controller is a controller
@@ -81,30 +81,28 @@ func NewRouter() {
 
 	r.GET("/swagger/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "NAME_OF_ENV_VARIABLE"))
 
+	r.LoadHTMLGlob("internal/app/adapter/view/*")
+	r.GET("/hello", index)
+
+	r.GET("/ticker", ticker)
+	if os.Getenv("env") == "dev" {
+		defaultAddr := ":8081"
+		err := r.Run(defaultAddr)
+		if err != nil {
+			panic(err)
+		}
+
+		return
+	}
+
 	GinFaas = ginAdapter.New(r)
 
 	faas.Start(Handler)
 }
 
-/*
-// Router is routing settings
-func Router() *gin.Engine {
-	r := gin.Default()
-	ctrl := Controller{}
-	// NOTICE: following path is from CURRENT directory, so please run Gin from root directory
-	r.LoadHTMLGlob("internal/app/adapter/view/*")
-	r.GET("/", ctrl.index)
-	r.GET("/ticker", ctrl.ticker)
-	r.GET("/candlestick", ctrl.candlestick)
-	r.GET("/parameter", ctrl.parameter)
-	r.GET("/order", ctrl.order)
-	return r
-}
-*/
-
-func (ctrl Controller) index(c *gin.Context) {
+func index(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.tmpl", gin.H{
-		"title": "Hello Goilerplate",
+		"title": "Hello airdb",
 	})
 }
 
@@ -138,35 +136,8 @@ func DefaultString(c *gin.Context) {
 	c.String(http.StatusOK, strings.Join(modules, "\n"))
 }
 
-func (ctrl Controller) ticker(c *gin.Context) {
+func ticker(c *gin.Context) {
 	pair := valueobject.BtcJpy
 	ticker := usecase.Ticker(bitbank, pair) // Dependency Injection
-	c.JSON(200, ticker)
-}
-
-/*
-func (ctrl Controller) candlestick(c *gin.Context) {
-	args := usecase.OhlcArgs{
-		E: bitbank, // Dependency Injection
-		P: valueobject.BtcJpy,
-		T: valueobject.OneMin,
-	}
-	candlestick := usecase.Ohlc(args)
-	c.JSON(200, candlestick)
-}
-
-func (ctrl Controller) parameter(c *gin.Context) {
-	parameter := usecase.Parameter(parameterRepository) // Dependency Injection
-	c.JSON(200, parameter)
-}
-
-func (ctrl Controller) order(c *gin.Context) {
-	order := usecase.AddNewCardAndEatCheese(orderRepository) // Dependency Injection
-	c.JSON(200, order)
-}
-*/
-
-func (ctrl Controller) order(c *gin.Context) {
-	order := usecase.AddNewCardAndEatCheese(orderRepository) // Dependency Injection
-	c.JSON(200, order)
+	c.JSON(http.StatusOK, ticker)
 }

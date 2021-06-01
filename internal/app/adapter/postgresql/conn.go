@@ -9,6 +9,11 @@ import (
 	"gorm.io/gorm"
 )
 
+const (
+	maxIdleConn = 10
+	maxOpenConn = 100
+)
+
 // Connection gets connection of postgresql database
 func Connection() (db *gorm.DB) {
 	host := viper.Get("PGHOST")
@@ -22,8 +27,8 @@ func Connection() (db *gorm.DB) {
 
 	sqlDB, _ := db.DB()
 
-	sqlDB.SetMaxIdleConns(10)
-	sqlDB.SetMaxOpenConns(100)
+	sqlDB.SetMaxIdleConns(maxIdleConn)
+	sqlDB.SetMaxOpenConns(maxOpenConn)
 	sqlDB.SetConnMaxLifetime(time.Hour)
 	return db
 }
