@@ -33,6 +33,8 @@ var GinFaas *ginAdapter.GinFaas
 // @in header
 // @name Authorization
 
+// @schemes https
+// @host scf.baobeihuijia.com
 // @BasePath /test/
 func NewRouter() {
 	fmt.Printf("Gin start")
