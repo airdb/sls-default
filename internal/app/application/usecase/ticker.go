@@ -11,6 +11,5 @@ func Ticker(e service.IExchange, p valueobject.Pair) valueobject.Ticker {
 }
 
 func GetUser(e service.IExchange) valueobject.User {
-
 	return e.GetUser()
 }

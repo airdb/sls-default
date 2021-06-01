@@ -25,7 +25,7 @@ import (
 
 var (
 	bitbank = service.Bitbank{}
-	user = service.Bitbank{}
+	user    = service.Bitbank{}
 	// parameterRepository = repository.Parameter{}
 	// orderRepository     = repository.Order{}
 )

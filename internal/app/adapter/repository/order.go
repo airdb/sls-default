@@ -24,11 +24,6 @@ func (o Order) Get() domain.Order {
 	}
 	orderFactory := factory.Order{}
 	return orderFactory.Generate(
-		order.Person.ID,
-		order.Person.Name,
-		order.Person.Weight,
-		order.Payment.Card.ID,
-		order.Payment.Card.CardBrand.Brand,
 		order.ID,
 	)
 }
@@ -36,35 +31,9 @@ func (o Order) Get() domain.Order {
 // Update updates order
 func (o Order) Update(order domain.Order) {
 	db := postgresql.Connection()
-	card := model.Card{
-		ID:    order.Payment.Card.ID,
-		Brand: string(order.Payment.Card.Brand),
-	}
-	payment := model.Payment{
-		OrderID: order.ID,
-		CardID:  card.ID,
-		Card:    card,
-	}
-	person := model.Person{
-		ID:     order.Person.ID,
-		Name:   order.Person.Name,
-		Weight: order.Person.Weight,
-	}
 
 	err := db.Transaction(func(tx *gorm.DB) error {
-		var err error
-		err = tx.Exec("update persons set name = ?, weight = ? where person_id = ?",
-			person.Name,
-			person.Weight,
-			person.ID).Error
-		if err != nil {
-			return errors.New("rollback")
-		}
-		err = tx.Exec("insert into cards values (?, ?)", card.ID, card.Brand).Error
-		if err != nil {
-			return errors.New("rollback")
-		}
-		err = tx.Exec("update payments set card_id = ? where order_id = ?", payment.CardID, payment.OrderID).Error
+		err := tx.Exec("update payments set card_id = 1").Error
 		if err != nil {
 			return errors.New("rollback")
 		}

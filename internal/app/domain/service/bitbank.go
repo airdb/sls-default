@@ -4,12 +4,13 @@ import (
 	"github.com/airdb/scf-go/internal/app/domain/valueobject"
 )
 
-func (b Bitbank)  GetUser() valueobject.User {
+func (b Bitbank) GetUser() valueobject.User {
 	return valueobject.User{
-		ID:       111,
+		ID:       1,
 		Username: "dean",
 	}
 }
+
 // Bitbank is an bitcoin exchange
 type Bitbank struct{}
 
@@ -47,60 +48,5 @@ func convertToCandlestick(res bitbankohlcresponse) []valueobject.CandleStick {
 		})
 	}
 	return cs
-}
-
-// OneMin is a timeunit
-const (
-	OneMin valueobject.Timeunit = iota
-	FiveMin
-	FifteenMin
-	ThirtyMin
-	OneHour
-	FourHour
-	EightHour
-	TweleveHour
-	OneDay
-	OneWeek
-)
-
-func (b Bitbank) convertTimeunit(t valueobject.Timeunit) string {
-	return b.timeunitNames()[t]
-}
-
-func (b Bitbank) timeunitNames() []string {
-	return []string{
-		"1min",
-		"5min",
-		"15min",
-		"30min",
-		"1hour",
-		"4hour",
-		"8hour",
-		"12hour",
-		"1day",
-		"1week",
-	}
-}
-
-func (b Bitbank) convertPair(p valueobject.Pair) string {
-	return b.pairNames()[p]
-}
-
-func (b Bitbank) pairNames() []string {
-	return []string{
-		"btc_jpy",
-	}
-}
-
-func (b Bitbank) yyyy(t valueobject.Timeunit) string {
-	day := time.Now()
-	var layout string
-	switch t {
-	case OneMin, FiveMin, FifteenMin, ThirtyMin, OneHour:
-		layout = "20060102"
-	default:
-		layout = "2006"
-	}
-	return day.Format(layout)
 }
 */

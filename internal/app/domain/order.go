@@ -6,5 +6,4 @@ import "github.com/airdb/scf-go/internal/app/domain/valueobject"
 type Order struct {
 	ID      string
 	Payment valueobject.Payment
-	Person  Person
 }

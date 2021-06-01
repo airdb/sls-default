@@ -8,8 +8,7 @@ const (
 	BtcJpy Pair = iota
 )
 
-
-type User struct{
-	ID uint64
+type User struct {
+	ID       uint64
 	Username string
 }
