@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/airdb/scf-go/internal/app/domain/service"
-	"github.com/airdb/scf-go/internal/app/domain/usecase"
 	"github.com/airdb/scf-go/internal/app/domain/valueobject"
 	"github.com/airdb/scf-go/internal/version"
 
@@ -129,11 +128,11 @@ func DefaultString(c *gin.Context) {
 
 func ticker(c *gin.Context) {
 	pair := valueobject.BtcJpy
-	ticker := usecase.Ticker(bitbank, pair) // Dependency Injection
+	ticker := service.Ticker(bitbank, pair) // Dependency Injection
 	c.JSON(http.StatusOK, ticker)
 }
 
 func getUser(c *gin.Context) {
-	user := usecase.GetUser(user)
+	user := service.GetUser(user)
 	c.JSON(http.StatusOK, user)
 }

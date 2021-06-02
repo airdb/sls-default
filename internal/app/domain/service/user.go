@@ -47,3 +47,12 @@ func convertToCandlestick(res bitbankohlcresponse) []valueobject.CandleStick {
 	return cs
 }
 */
+
+// Ticker is the usecase of getting ticker
+func Ticker(e IExchange, p valueobject.Pair) valueobject.Ticker {
+	return e.Ticker(p)
+}
+
+func GetUser(e IExchange) valueobject.User {
+	return e.GetUser()
+}
