@@ -13,13 +13,13 @@ import (
 )
 
 const (
-	maxIdleConn = 10
-	maxOpenConn = 100
+	maxIdleConn = 2
+	maxOpenConn = 5
 )
 
 // Connection gets connection of mysql database
 func Connection() (db *gorm.DB) {
-	dsn := os.Getenv("dsn")
+	dsn := os.Getenv("MAIN_DSN_WRITE")
 	if !strings.Contains(dsn, "?") {
 		dsn += "?charset=utf8&parseTime=True"
 	}
