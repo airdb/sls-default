@@ -39,6 +39,7 @@ var GinFaas *ginAdapter.GinFaas
 // @description This is a sample serverless service.
 // @termsOfService https://airdb.io/terms/
 
+// @contact.name Discussion
 // @contact.url https://github.com/airdb/airdb.github.io/discussions
 
 // @securityDefinitions.apikey ApiKeyAuth
@@ -117,6 +118,7 @@ func DefaultString(c *gin.Context) {
 
 // @Security ApiKeyAuth
 // @Description get struct array by ID
+// @Tags user
 // @Accept  json
 // @Produce  json
 // @Success 200 {string} string	"ok"
