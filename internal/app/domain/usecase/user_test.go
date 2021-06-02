@@ -3,7 +3,7 @@ package usecase_test
 import (
 	"testing"
 
-	"github.com/airdb/scf-go/internal/app/application/usecase"
+	"github.com/airdb/scf-go/internal/app/domain/usecase"
 	"github.com/airdb/scf-go/internal/app/domain/valueobject"
 	"github.com/airdb/scf-go/testdata"
 )
