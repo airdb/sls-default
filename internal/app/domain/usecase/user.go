@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	"github.com/airdb/scf-go/internal/app/application/service"
+	"github.com/airdb/scf-go/internal/app/domain/service"
 	"github.com/airdb/scf-go/internal/app/domain/valueobject"
 )
 
