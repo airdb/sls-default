@@ -3,20 +3,26 @@ package repository
 import (
 	"errors"
 
-	"github.com/airdb/scf-go/internal/app/adapter/mysql"
-	"github.com/airdb/scf-go/internal/app/adapter/mysql/model"
 	"github.com/airdb/scf-go/internal/app/domain"
 	"github.com/airdb/scf-go/internal/app/domain/factory"
 	"gorm.io/gorm"
 )
+
+// Order is the model of orders
+type Order struct {
+	ID       string `gorm:"column:order_id;type:uuid"`
+	PersonID string `gorm:"type:uuid"`
+	// Person   Person  // `gorm:"foreignKey:PersonID;references:ID"`
+	// Payment  Payment // `gorm:"foreignkey:OrderID;references:ID"`
+}
 
 // User is the repository of domain.User
 type User struct{}
 
 // Get gets order
 func (u User) Get() domain.User {
-	db := mysql.Connection()
-	var order model.Order
+	db := Connection()
+	var order Order
 	// User has Person/Payment relation and Payment has Card relation which has CardBrand relation.
 	result := db.Preload("Person").Preload("Payment.Card.CardBrand").Find(&order)
 	if result.Error != nil {
@@ -30,7 +36,7 @@ func (u User) Get() domain.User {
 
 // Update updates order
 func (u User) Update(order domain.User) {
-	db := mysql.Connection()
+	db := Connection()
 
 	err := db.Transaction(func(tx *gorm.DB) error {
 		err := tx.Exec("update payments set card_id = 1").Error
