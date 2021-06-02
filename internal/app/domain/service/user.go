@@ -1,6 +1,9 @@
 package service
 
 import (
+	"fmt"
+
+	"github.com/airdb/scf-go/internal/app/adapter/repository"
 	"github.com/airdb/scf-go/internal/app/domain/valueobject"
 )
 
@@ -10,11 +13,26 @@ type IExchange interface {
 	// Ticker(p valueobject.Pair) valueobject.Ticker
 }
 
+type IUser interface {
+	Get() repository.Order
+	Update(repository.Order)
+}
+
 func (b Bitbank) GetUser() valueobject.User {
-	return valueobject.User{
-		ID:       1,
-		Username: "dean",
+	a := valueobject.User{
+		// ID:       1,
+		// Username: "dean",
 	}
+
+	u := repository.User{}
+	c := u.Get()
+
+	a.ID = c.ID
+	a.Username = c.Username
+
+	fmt.Println(c)
+
+	return a
 }
 
 // Bitbank is an bitcoin exchange

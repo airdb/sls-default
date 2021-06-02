@@ -5,13 +5,15 @@ import (
 )
 
 // Order is the factory of domain.User
-type Order struct{}
+type User struct{}
 
 // Generate generates domain.User from primitives
-func (of Order) Generate(
-	orderID string,
+func (of User) Generate(
+	id uint64,
+	username string,
 ) domain.User {
 	return domain.User{
-		ID: orderID,
+		ID:       id,
+		Username: username,
 	}
 }

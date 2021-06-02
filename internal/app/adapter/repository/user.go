@@ -17,20 +17,24 @@ type Order struct {
 }
 
 // User is the repository of domain.User
-type User struct{}
+type User struct {
+	ID       uint64
+	Username string `gorm:"column:nickname"`
+}
 
 // Get gets order
 func (u User) Get() domain.User {
 	db := Connection()
-	var order Order
-	// User has Person/Payment relation and Payment has Card relation which has CardBrand relation.
-	result := db.Preload("Person").Preload("Payment.Card.CardBrand").Find(&order)
+	var user User
+
+	result := db.Find(&user)
 	if result.Error != nil {
 		panic(result.Error)
 	}
-	orderFactory := factory.Order{}
+	orderFactory := factory.User{}
 	return orderFactory.Generate(
-		order.ID,
+		user.ID,
+		user.Username,
 	)
 }
 
