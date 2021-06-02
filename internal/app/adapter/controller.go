@@ -36,15 +36,10 @@ var GinFaas *ginAdapter.GinFaas
 
 // @title Swagger Example API
 // @version 1.0
-// @description This is a sample server Petstore server.
-// @termsOfService http://swagger.io/terms/
+// @description This is a sample serverless service.
+// @termsOfService https://airdb.io/terms/
 
-// @contact.name API Support
-// @contact.url http://www.swagger.io/support
-// @contact.email support@swagger.io
-
-// @license.name Apache 2.0
-// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @contact.url https://github.com/airdb/airdb.github.io/discussions
 
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header
@@ -62,7 +57,7 @@ func NewRouter() {
 	r.GET("/", DefaultRoot)
 	r.GET(projectPath, DefaultString)
 
-	r.GET("/swagger/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "NAME_OF_ENV_VARIABLE"))
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.URL("./doc.json")))
 
 	r.LoadHTMLGlob("internal/app/adapter/view/*")
 	r.GET("/hello", index)
@@ -120,6 +115,14 @@ func DefaultString(c *gin.Context) {
 	c.String(http.StatusOK, strings.Join(modules, "\n"))
 }
 
+// @Security ApiKeyAuth
+// @Description get struct array by ID
+// @Accept  json
+// @Produce  json
+// @Success 200 {string} string	"ok"
+// @Failure 400 {object} string "We need ID!!"
+// @Failure 404 {object} string "Can not find ID"
+// @Router /user/query [get]
 func getUser(c *gin.Context) {
 	user := service.GetUser(user) // Dependency Injection
 	c.JSON(http.StatusOK, user)
