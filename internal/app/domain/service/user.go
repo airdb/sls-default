@@ -7,7 +7,7 @@ import (
 // IExchange is interface of bitcoin exchange
 type IExchange interface {
 	GetUser() valueobject.User
-	Ticker(p valueobject.Pair) valueobject.Ticker
+	// Ticker(p valueobject.Pair) valueobject.Ticker
 }
 
 func (b Bitbank) GetUser() valueobject.User {
@@ -19,13 +19,6 @@ func (b Bitbank) GetUser() valueobject.User {
 
 // Bitbank is an bitcoin exchange
 type Bitbank struct{}
-
-// Ticker gets ticker via bitbank public api
-func (b Bitbank) Ticker(p valueobject.Pair) valueobject.Ticker {
-	return valueobject.Ticker{
-		Timestamp: "2016",
-	}
-}
 
 /*
 func convertToCandlestick(res bitbankohlcresponse) []valueobject.CandleStick {
@@ -47,11 +40,6 @@ func convertToCandlestick(res bitbankohlcresponse) []valueobject.CandleStick {
 	return cs
 }
 */
-
-// Ticker is the usecase of getting ticker
-func Ticker(e IExchange, p valueobject.Pair) valueobject.Ticker {
-	return e.Ticker(p)
-}
 
 func GetUser(e IExchange) valueobject.User {
 	return e.GetUser()

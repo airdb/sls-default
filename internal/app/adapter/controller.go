@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/airdb/scf-go/internal/app/domain/service"
-	"github.com/airdb/scf-go/internal/app/domain/valueobject"
 	"github.com/airdb/scf-go/internal/version"
 
 	"github.com/serverless-plus/tencent-serverless-go/events"
@@ -23,14 +22,10 @@ import (
 )
 
 var (
-	bitbank = service.Bitbank{}
-	user    = service.Bitbank{}
+	user = service.Bitbank{}
 	// parameterRepository = repository.Parameter{}
 	// orderRepository     = repository.Order{}
 )
-
-// Controller is a controller
-type Controller struct{}
 
 // Handler serverless faas handler.
 func Handler(ctx context.Context, req events.APIGatewayRequest) (events.APIGatewayResponse, error) {
@@ -72,7 +67,6 @@ func NewRouter() {
 	r.LoadHTMLGlob("internal/app/adapter/view/*")
 	r.GET("/hello", index)
 
-	r.GET("/ticker", ticker)
 	r.GET("/user/query", getUser)
 
 	if os.Getenv("env") == "dev" {
@@ -126,13 +120,7 @@ func DefaultString(c *gin.Context) {
 	c.String(http.StatusOK, strings.Join(modules, "\n"))
 }
 
-func ticker(c *gin.Context) {
-	pair := valueobject.BtcJpy
-	ticker := service.Ticker(bitbank, pair) // Dependency Injection
-	c.JSON(http.StatusOK, ticker)
-}
-
 func getUser(c *gin.Context) {
-	user := service.GetUser(user)
+	user := service.GetUser(user) // Dependency Injection
 	c.JSON(http.StatusOK, user)
 }
