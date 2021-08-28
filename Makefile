@@ -13,7 +13,7 @@ LDFLAGS += "-X=github.com/airdb/sailor/version.Repo=$(REPO) \
 
 # SLSENV=SERVERLESS_PLATFORM_VENDOR=tencent GLOBAL_ACCELERATOR_NA=true
 SLSENV=SERVERLESS_PLATFORM_VENDOR=tencent
-default: build deploy
+default: swag build deploy
 
 build:
 	GOOS=linux go build $(LDFLAGS) -o main main.go
@@ -27,7 +27,7 @@ dev:
 wire:
 	wire gen internal/app/wire.go
 
-deploy: swag
+deploy:
 	${SLSENV} sls deploy --stage test
 	@echo checkout all scf apps, https://serverless.cloud.tencent.com/
 

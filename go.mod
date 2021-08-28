@@ -3,14 +3,15 @@ module github.com/airdb/sls-default
 go 1.16
 
 require (
+	github.com/airdb/sailor v0.0.3 // indirect
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
-	github.com/gin-gonic/gin v1.7.1
+	github.com/gin-gonic/gin v1.7.2
 	github.com/go-openapi/spec v0.20.3 // indirect
 	github.com/go-openapi/swag v0.19.15 // indirect
 	github.com/google/uuid v1.2.0
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
-	github.com/serverless-plus/tencent-serverless-go v0.1.2
+	github.com/serverless-plus/tencent-serverless-go v1.0.1
 	github.com/spf13/viper v1.7.1
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0

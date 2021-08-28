@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"os"
 	"strings"
 
+	"github.com/airdb/sailor/deployutil"
+	"github.com/airdb/sailor/version"
 	"github.com/airdb/sls-default/internal/app/application/usecase"
 	service "github.com/airdb/sls-default/internal/app/domain/service"
 	"github.com/airdb/sls-default/internal/app/domain/valueobject"
-	"github.com/airdb/sls-default/internal/version"
 
 	"github.com/serverless-plus/tencent-serverless-go/events"
 	"github.com/serverless-plus/tencent-serverless-go/faas"
@@ -65,6 +65,10 @@ func NewRouter() {
 	r := gin.Default()
 
 	projectPath := "/index"
+
+	// Init the loc and set timezone.
+	version.Init()
+
 	r.GET("/", DefaultRoot)
 	r.GET(projectPath, DefaultString)
 
@@ -76,7 +80,7 @@ func NewRouter() {
 	r.GET("/ticker", ticker)
 	r.GET("/user/query", getUser)
 
-	if os.Getenv("env") == "dev" {
+	if deployutil.IsStageDev() {
 		defaultAddr := ":8081"
 		err := r.Run(defaultAddr)
 		if err != nil {
