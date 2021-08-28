@@ -1,4 +1,4 @@
-module github.com/airdb/scf-go
+module github.com/airdb/sls-default
 
 go 1.16
 

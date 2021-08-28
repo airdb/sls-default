@@ -3,14 +3,16 @@ SHELL = /bin/bash
 VERSION:=$(shell git describe --dirty --always)
 #VERSION := $(shell git describe --tags)
 BUILD := $(shell git rev-parse HEAD)
-REPO := github.com/airdb/scf-go
+REPO := github.com/airdb/sls-default
 
 LDFLAGS=-ldflags
-LDFLAGS += "-X=$(REPO)/internal/version.Repo=$(REPO) \
-            -X=$(REPO)/internal/version.Version=$(VERSION) \
-            -X=$(REPO)/internal/version.Build=$(BUILD) \
-            -X=$(REPO)/internal/version.BuildTime=$(shell date +%s)"
+LDFLAGS += "-X=github.com/airdb/sailor/version.Repo=$(REPO) \
+            -X=github.com/airdb/sailor/version.Version=$(VERSION) \
+            -X=github.com/airdb/sailor/version.Build=$(BUILD) \
+            -X=github.com/airdb/sailor/version.BuildTime=$(shell date +%s)"
 
+# SLSENV=SERVERLESS_PLATFORM_VENDOR=tencent GLOBAL_ACCELERATOR_NA=true
+SLSENV=SERVERLESS_PLATFORM_VENDOR=tencent
 default: build deploy
 
 build:
@@ -22,19 +24,19 @@ swag:
 dev:
 	env=dev go run  $(LDFLAGS) main.go
 
+wire:
+	wire gen internal/app/wire.go
+
 deploy: swag
-	SERVERLESS_PLATFORM_VENDOR=tencent GLOBAL_ACCELERATOR_NA=true sls deploy --stage test
+	${SLSENV} sls deploy --stage test
 	@echo checkout all scf apps, https://serverless.cloud.tencent.com/
 
 release: swag
-	sls deploy --stage release
+	${SLSENV} sls deploy --stage release
 	@echo checkout all scf apps, https://serverless.cloud.tencent.com/
 
 log:
-	sls logs --tail --stage test
+	${SLSENV} sls logs --tail --stage test
 
 logrelease:
-	sls logs --tail --stage release
-
-docker:
-	docker run --platform linux/amd64 -it -v $(HOME)/go:/go airdb/serverless bash
+	${SLSENV} sls logs --tail --stage release

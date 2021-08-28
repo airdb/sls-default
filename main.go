@@ -3,8 +3,8 @@ package main
 import (
 	"time"
 
-	"github.com/airdb/scf-go/internal/app/adapter"
-	"github.com/airdb/scf-go/internal/version"
+	"github.com/airdb/sls-default/internal/app/adapter"
+	"github.com/airdb/sls-default/internal/version"
 )
 
 func main() {

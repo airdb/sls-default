@@ -1,6 +1,6 @@
 package domain
 
-import "github.com/airdb/scf-go/internal/app/domain/valueobject"
+import "github.com/airdb/sls-default/internal/app/domain/valueobject"
 
 // User is an order which has id, payment and person info
 type User struct {

@@ -7,10 +7,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/airdb/scf-go/internal/app/application/usecase"
-	service "github.com/airdb/scf-go/internal/app/domain/service"
-	"github.com/airdb/scf-go/internal/app/domain/valueobject"
-	"github.com/airdb/scf-go/internal/version"
+	"github.com/airdb/sls-default/internal/app/application/usecase"
+	service "github.com/airdb/sls-default/internal/app/domain/service"
+	"github.com/airdb/sls-default/internal/app/domain/valueobject"
+	"github.com/airdb/sls-default/internal/version"
 
 	"github.com/serverless-plus/tencent-serverless-go/events"
 	"github.com/serverless-plus/tencent-serverless-go/faas"
@@ -20,7 +20,7 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
-	_ "github.com/airdb/scf-go/docs"
+	_ "github.com/airdb/sls-default/docs"
 )
 
 var (

@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/airdb/scf-go/internal/app/domain/valueobject"
+	"github.com/airdb/sls-default/internal/app/domain/valueobject"
 )
 
 func (b Bitbank) GetUser() valueobject.User {

@@ -1,7 +1,7 @@
 package factory
 
 import (
-	"github.com/airdb/scf-go/internal/app/domain"
+	"github.com/airdb/sls-default/internal/app/domain"
 )
 
 // Order is the factory of domain.User

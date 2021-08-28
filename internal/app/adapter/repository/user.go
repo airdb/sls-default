@@ -3,10 +3,10 @@ package repository
 import (
 	"errors"
 
-	"github.com/airdb/scf-go/internal/app/adapter/mysql"
-	"github.com/airdb/scf-go/internal/app/adapter/mysql/model"
-	"github.com/airdb/scf-go/internal/app/domain"
-	"github.com/airdb/scf-go/internal/app/domain/factory"
+	"github.com/airdb/sls-default/internal/app/adapter/mysql"
+	"github.com/airdb/sls-default/internal/app/adapter/mysql/model"
+	"github.com/airdb/sls-default/internal/app/domain"
+	"github.com/airdb/sls-default/internal/app/domain/factory"
 	"gorm.io/gorm"
 )
 

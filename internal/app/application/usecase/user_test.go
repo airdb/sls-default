@@ -3,9 +3,9 @@ package usecase_test
 import (
 	"testing"
 
-	"github.com/airdb/scf-go/internal/app/application/usecase"
-	"github.com/airdb/scf-go/internal/app/domain/valueobject"
-	"github.com/airdb/scf-go/testdata"
+	"github.com/airdb/sls-default/internal/app/application/usecase"
+	"github.com/airdb/sls-default/internal/app/domain/valueobject"
+	"github.com/airdb/sls-default/testdata"
 )
 
 func TestTicker(t *testing.T) {

@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"github.com/airdb/scf-go/internal/app/application/service"
-	"github.com/airdb/scf-go/internal/app/domain/valueobject"
+	"github.com/airdb/sls-default/internal/app/application/service"
+	"github.com/airdb/sls-default/internal/app/domain/valueobject"
 )
 
 // Ticker is the usecase of getting ticker
